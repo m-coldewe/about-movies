@@ -15,7 +15,7 @@ df = pd.read_sql(query, conn)
 conn.close()
 
 # Create the Plotly figure
-fig = px.bar(df, x='domestic_distributor', y='worldwide_profit', title='Worldwide Profit by Movie Distributor')
+fig = px.bar(df, x='domestic_distributor', y='worldwide_profit')
 fig.update_xaxes(title_text='Movie Distributor')
 fig.update_yaxes(title_text='Worldwide Profit')
 # Create the Dash app
@@ -23,8 +23,8 @@ dash.register_page(__name__)
 
 # Define the layout
 layout = html.Div(children=[
-    html.H1(children='Worldwide Profit Visualization'),
-
+    html.H2(children='Worldwide Profit by Movie Distributor', style={'color':'blue', 'textAlign':'center'}),
+    #dcc.Dropdown([{"value": x} for x in df.domestic_distributor.unique()], id='dist=choice' style={'width':'50%'}),
     dcc.Graph(
         id='Worldwide Profit-bar-chart',
         figure=fig
