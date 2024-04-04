@@ -1,0 +1,65 @@
+// used for localized pricing
+var products = [
+	521359, // 1 HQ download
+	521358, // 5 HQ downloads
+	522527, // 10 HQ downloads
+	522532, // 25 HQ downloads
+	//522533, // 50 HQ downloads
+	522534, // 100 HQ downloads
+	522535, // Unlimited plan for 1 month
+	522536, // Unlimited plan for 3 months
+	522537 // Unlimited plan for 12 months
+].join(',');
+var paddleProductsURL = 'https://checkout.paddle.com/api/2.0/prices?product_ids=' + products;// + '&customer_country=GB';
+
+var currencySigns = {
+	'USD': '$',
+	'INR': '₹',
+	'HKD': 'HK$ ',
+	'NZD': 'NZ$ ',
+	'GBP': '£',
+	//'CNY': 'CN¥ ',
+	'CNY': '¥',
+	'CAD': 'CA$ ',
+	'BRL': 'R$ ',
+	'AUD': 'A$ ',
+	'RUB': '₽',
+	'EUR': '€',
+	'JPY': '¥'
+}
+
+var paddleMapping = {
+	"L1": 521359,
+	"L5": 521358,
+	"L25": 522532,
+	"L100": 522534,
+	"L0M1": 522535,
+	"L0M3": 522536,
+	"L0M12": 522537
+}
+
+function jsonp(url, callback, context) { // taken from Paddle.js
+	var name = "_jsonp_" + Math.ceil(Math.random()*10000000);
+	if(url.match(/\?/)) {
+		url += "&callback="+name;
+	} else {
+		url += "?callback="+name;
+	}
+
+	var script = document.createElement('script');
+	script.type = 'text/javascript';
+	script.src = url;
+	script.onerror = function (e) {
+		data = { "success": false };
+		callback.call((context || window), data);
+	}
+
+	window[name] = function(data) {
+		callback.call((context || window), data);
+		document.getElementsByTagName('head')[0].removeChild(script);
+		script = null;
+		delete window[name];
+	};
+
+	document.getElementsByTagName('head')[0].appendChild(script);
+}
