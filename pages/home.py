@@ -27,14 +27,14 @@ layout = dbc.Container([
         dbc.Col([
             dbc.Carousel(
     items=[
-        {"key": "1", "src": "/assets/test.png"},
-        {"key": "2", "src": "/assets/test.png"},
-        {"key": "3", "src": "/assets/test.png"},
+        {"key": "1", "src": "/assets/test.png", "img_style":{"max-height":"500px"}},
+        {"key": "2", "src": "/assets/test.png", "img_style":{"max-height":"500px"}},
+        {"key": "3", "src": "/assets/test.png", "img_style":{"max-height":"500px"}},
     ],
     controls=False,
     indicators=False,
     interval=3000,
-    ride="carousel",
+    ride="carousel"
 )
         ])
     ])
