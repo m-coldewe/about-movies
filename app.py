@@ -14,7 +14,8 @@ nav = dbc.Nav(
         dbc.NavItem(dbc.NavLink("About", active="exact", href="/about")),
         dbc.NavItem(dbc.NavLink("Map", active="exact", href="/map")),
         dbc.NavItem(dbc.NavLink("Profit", active="exact", href="/profit")),
-        dbc.NavItem(dbc.NavLink("Ratings", active=False, href="/ratings"))
+        dbc.NavItem(dbc.NavLink("Ratings", active=False, href="/ratings")),
+        dbc.NavItem(dbc.NavLink("Genres", active="exact", href="/genre"))
     ],
     pills=True,
 )
