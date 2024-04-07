@@ -1,46 +1,76 @@
 import dash
 from dash import html, Dash, html, dcc
 import dash_bootstrap_components as dbc
-from dash_bootstrap_templates import load_figure_template
+
 
 dash.register_page(__name__, path='/about')
 
+content_card_1 = "Paolo enjoys photography and following his person around. He's detail-oriented, and enjoys problem-solving."
+content_card_2 = "Rush enjoys pursuing knowledge down rabbit holes and arguing with TAs. He's focused, and purses understanding whereever his inquiries take him."
+content_card_3 = "Lady enjoys long walks and good stories. She's persistent, and enjoys seeing her ideas bear fruit."
 
-# define tab content
+card1 = dbc.Card(
+    [
+        dbc.CardImg(src="/assets/static/images/cesar_test.jpg", top=True, className="card-img-top"),
+        dbc.CardBody(
+            [
+                html.H4("Paolo"), html.H4("aka Cesar", className="card-title"),
+                html.P([content_card_1, html.Br(), html.Br(), html.P("Favorite movie: 'Back to the Future'")],
+                    className="card-text",
+                ),
+                dbc.Button("Click to Find Cesar", color="secondary", href="https://google.com"),
+            ]
+        ),
+    ],
+)
 
-tab1content = dbc.Card([
-    dbc.CardBody([
-        html.H4("p-u-p", className="card-title"),
-        html.P("Cesar needs to put his information here.", className="card-text"),
-        html.P("Harsh needs to put his information here.", className="card-text"),
-        html.P("Meagan needs to put her information here.", className="card-text")
-    ])
-])
+card2 = dbc.Card(
+    [
+        dbc.CardImg(src="/assets/static/images/harsh_test.jpg", top=True, className="card-img-top"),
+        dbc.CardBody(
+            [
+                html.H4("Rush"), html.H4("aka Harsh", className="card-title"),
+                html.P([content_card_2, html.Br(), html.Br(), html.P("Favorite movie: 'Transformers: End of Days'")],
+                    className="card-text",
+                ),
+                dbc.Button("Click to Find Harsh", color="secondary", href="https://google.com"),
+            ]
+        ),
+    ],
+)
 
-tab2content = dbc.Card([
-    html.H4('the-dataset', className="card-title"),
-    html.P("We found our dataset on Kaggle.com", className="card-text"),
-    html.P(html.A("https://www.kaggle.com/datasets/narmelan/top-ten-blockbusters-20191977", href="https://www.kaggle.com/datasets/narmelan/top-ten-blockbusters-20191977"), className="card-text")
-])
+card3 = dbc.Card(
+    [
+        dbc.CardImg(src="/assets/static/images/meagan_test.jpg", top=True, className="card-img-top"),
+        dbc.CardBody(
+            [
+                html.H4("Lady"), html.H4("aka Meagan", className="card-title"),
+                html.P([content_card_3, html.Br(), html.Br(), html.P("Favorite movie: 'Lord of the Rings: Fellowship of the Ring'")],
+                    className="card-text",
+                ),
+                dbc.Button("Click to Find Meagan", color="secondary", href="https://google.com"),
+            ]
+        ),
+    ],
+)
 
 
-# define layout
 layout = dbc.Container([
     dbc.Row([
-        dbc.Col(html.H2("Welcome to about-movies", className='text-center text-primary'), width=12)
+        html.H2("Perfectionists-under-pressure (aka P-U-P):")
     ]),
     dbc.Row([
-        dbc.Col(tab1content, width=12)
+        dbc.Col([
+            card1
+        ]),
+        dbc.Col([
+            card2
+        ]),
+        dbc.Col([
+            card3
+        ])
     ]),
     dbc.Row([
-        dbc.Col(tab2content, width=12)
+        html.H2("The dataset:")
     ]),
-    dbc.Row([
-        dbc.Col(dbc.Tabs([
-            dbc.Tab(tab1content, label="p-u-p"),
-            dbc.Tab(tab2content, label="the-dataset"),
-            dbc.Tab("This tab's content is", label="Tab 3", disabled=True)
-        ]), width=12)
-    ])
 ])
-

@@ -1,5 +1,6 @@
 import dash
 from dash import html, dcc, callback, Input, Output
+import dash_bootstrap_components as dbc
 import plotly.express as px
 import pandas as pd
 import sqlite3
@@ -14,10 +15,12 @@ df = pd.read_sql(query, conn)
 # Close the database connection
 conn.close()
 
+
 # Create the Plotly figure
 fig = px.bar(df, x='domestic_distributor', y='worldwide_profit')
 fig.update_xaxes(title_text='Movie Distributor')
 fig.update_yaxes(title_text='Worldwide Profit')
+
 # Create the Dash app
 dash.register_page(__name__)
 
