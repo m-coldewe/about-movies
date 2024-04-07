@@ -54,11 +54,27 @@ card3 = dbc.Card(
     ],
 )
 
+dataset_content = "Retrived from kaggle.com, the Worldwide Blockbuster 2019-1977 dataset provides information on the top ten highest grossing films worldwide between the years 2019 and 1977. Further information on the sources of information and exceptions can be found at the link provided below."
+dataset_content2 = "The dataset includes the following attributes: release_year, rank_in_year, imdb_rating, mpaa_rating, film_title, film_budget, lengh_in_min, domestic_distributor, worldwide_gross, domestic_gross, and up to three associated genres."
+
+card4 = dbc.Card(
+    [
+        dbc.CardBody(
+            [
+                html.H3("Worldwide Blockbusters 2019-1977", className="card-title"),
+                html.P([dataset_content, html.Br(), html.Br(), html.P(dataset_content2)],
+                    className="card-text",
+                ),
+                dbc.Button("Click for further information", color="secondary", href="https://www.kaggle.com/datasets/narmelan/top-ten-blockbusters-20191977"),
+            ]
+        ),
+    ],
+)
 
 layout = dbc.Container([
     dbc.Row([
         html.H2("Perfectionists-under-pressure (aka P-U-P):")
-    ]),
+    ], className="pb-4"),
     dbc.Row([
         dbc.Col([
             card1
@@ -69,8 +85,13 @@ layout = dbc.Container([
         dbc.Col([
             card3
         ])
-    ]),
+    ], className="pb-5"),
     dbc.Row([
         html.H2("The dataset:")
     ]),
+    dbc.Row([
+       dbc.Col([
+           card4
+       ]) 
+    ])
 ])
