@@ -20,7 +20,7 @@ layout = dbc.Container([
     ]),
     dbc.Row([
         dbc.Col(html.H4("By perfectionists-under-pressure",
-                        className='text-center text-primary, mb-4'),
+                        className='text-center text-primary text-success, mb-4'),
                         width=12)
     ]),
     dbc.Row([

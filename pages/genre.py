@@ -13,20 +13,34 @@ app = dash.Dash(__name__)
 conn=sqlite3.connect(r"C:\Users\macol\OneDrive\Desktop\Classwork\about-movies\Resources\Blockbusters_2019_1977.db")
 
 # read data for genre and year
-query = "SELECT release_year, genre_1, genre_2, genre_3 FROM movie_data GROUP BY release_year"
+query = "SELECT release_year, genre_1, genre_2, genre_3, domestic_distributor FROM movie_data"
 df = pd.read_sql(query, conn)
 
 # close the database connection
 conn.close()
 
-# get the list of unique genres for the checkboxes
-genres = df[['genre_1', 'genre_2', 'genre_3']].stack().unique()
+genre_first = df[['release_year', 'genre_1', 'domestic_distributor']]
+genre_second = df[['release_year', 'genre_2', 'domestic_distributor']]
+genre_third = df[['release_year', 'genre_3', 'domestic_distributor']]
 
+genre_first_rn = genre_first.rename(columns={'genre_1':'genre'})
+genre_second_rn = genre_second.rename(columns={'genre_2':'genre'})
+genre_third_rn = genre_third.rename(columns={'genre_3':'genre'})
+
+genre_combined = pd.concat([genre_first_rn, genre_second_rn, genre_third_rn], axis=0)
+
+
+
+fig = px.line(genre_combined, x='release_year')
+fig.show()
+# get the list of unique genres for the checkboxes
+
+#print(genres)
 # register the page in the app
 dash.register_page(__name__, path='/genre')
 
 # set initial value for load view of the graph
-initial_value = list(genres)
+initial_value = list(genres.unique())
 
 template = load_figure_template('cyborg')
 
@@ -53,32 +67,26 @@ layout = dbc.Container([
 ])
 
 
-# define the callback to update the graph based on the selected genres
-@app.callback(
-    Output('genre-graph', 'figure'),
-    [Input('genre-radio', 'value')],
-)
+# # define the callback to update the graph based on the selected genres
+# @app.callback(
+#     Output('genre-graph', 'figure'),
+#     [Input('genre-radio', 'value')],
+# )
 
 
 
 # def update_genre_graph(selected_genres):
-#     filtered_df = df[df[['genre_1', 'genre_2', 'genre_3']].isin(selected_genres).any(axis=1)]
-#     fig = px.line(filtered_df.groupby('release_year').size().reset_index(name='count'), 
-#                   x = 'release_year', y = 'count', title = 'Genre Through the Years')
-#     return fig
 
-def update_genre_graph(selected_genres):
-
-    # if no genres, return empty figure
-    if not selected_genres:
-        return px.line(), {'display': 'none'}
+#     # if no genres, return empty figure
+#     if not selected_genres:
+#         return px.line(), {'display': 'none'}
     
-    filtered_df = df[df[['genre_1', 'genre_2', 'genre_3']].apply(lambda row: any(genre in selected_genres for genre in row),axis=1)]
+#     filtered_df = df[df[['genre_1', 'genre_2', 'genre_3']].apply(lambda row: any(genre in selected_genres for genre in row),axis=1)]
 
-    if filtered_df.empty:
-        return px.line(), {'display': 'none'}
+#     if filtered_df.empty:
+#         return px.line(), {'display': 'none'}
     
-    # plot the graph based on the filtered dataframe
-    fig = px.line(filtered_df.groupby('release_year').size().reset_index(name='count'),
-                 x='release_year', y='count', title='Genres Through the Years', template=template )
-    return fig, {}
+#     # plot the graph based on the filtered dataframe
+#     fig = px.line(filtered_df.groupby('release_year').size().reset_index(name='count'),
+#                  x='release_year', y='count', title='Genres Through the Years', template=template )
+#     return fig, {}
