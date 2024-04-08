@@ -18,7 +18,7 @@ card1 = dbc.Card(
                 html.P([content_card_1, html.Br(), html.Br(), html.P("Favorite movie: 'Back to the Future'")],
                     className="card-text",
                 ),
-                dbc.Button("Click to Find Cesar", color="secondary", href="https://google.com"),
+                dbc.Button("Find Cesar on Github", color="secondary", href="https://github.com/carojasp12"),
             ]
         ),
     ],
@@ -33,7 +33,7 @@ card2 = dbc.Card(
                 html.P([content_card_2, html.Br(), html.Br(), html.P("Favorite movie: 'Transformers: End of Days'")],
                     className="card-text",
                 ),
-                dbc.Button("Click to Find Harsh", color="secondary", href="https://google.com"),
+                dbc.Button("Find Harsh on Github", color="secondary", href="https://github.com/10H-K"),
             ]
         ),
     ],
@@ -48,7 +48,7 @@ card3 = dbc.Card(
                 html.P([content_card_3, html.Br(), html.Br(), html.P("Favorite movie: 'Lord of the Rings: Fellowship of the Ring'")],
                     className="card-text",
                 ),
-                dbc.Button("Click to Find Meagan", color="secondary", href="https://google.com"),
+                dbc.Button("Find Meagan on Github", color="secondary", href="https://github.com/m-coldewe"),
             ]
         ),
     ],
@@ -128,7 +128,7 @@ layout = dbc.Container([
         dbc.Col([
             card3
         ])
-    ], className="pb-5"),
+    ], className="pb-3"),
     dbc.Row([
         dbc.Col([
 
@@ -137,7 +137,7 @@ layout = dbc.Container([
         dbc.Col([
 
         ]),
-    ]),
+    ], className="pb-4"),
     dbc.Row([
         html.H2("The dataset:")
     ]),
