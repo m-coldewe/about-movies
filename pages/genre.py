@@ -1,5 +1,5 @@
 import dash
-from dash import html, dcc, callback, Input, Output
+from dash import html, dcc, Input, Output
 import plotly.express as px
 import dash_bootstrap_components as dbc
 from dash_bootstrap_templates import load_figure_template
@@ -19,6 +19,10 @@ df = pd.read_sql(query, conn)
 # close the database connection
 conn.close()
 
+template = load_figure_template('cyborg')
+
+# create dataframe with only one genre column by creating a new column for
+# each genre column, changing the column name to match, and contatenating
 genre_first = df[['release_year', 'genre_1', 'domestic_distributor']]
 genre_second = df[['release_year', 'genre_2', 'domestic_distributor']]
 genre_third = df[['release_year', 'genre_3', 'domestic_distributor']]
@@ -28,65 +32,21 @@ genre_second_rn = genre_second.rename(columns={'genre_2':'genre'})
 genre_third_rn = genre_third.rename(columns={'genre_3':'genre'})
 
 genre_combined = pd.concat([genre_first_rn, genre_second_rn, genre_third_rn], axis=0)
+genre_per_year = genre_combined.groupby(['release_year', 'genre']).size().reset_index(name='count')
 
+# create the figure
+fig = px.line(genre_per_year, x="release_year", y="count", color="genre", template=template)
 
+# # define layout
+layout = html.Div([
+    html.H4("about-genre"), html.Br(),
+    html.H3("A Look at Genre from 1977 - 2019", style={'color': 'lightblue', 'textAlign':'center'}),
+    dcc.Graph(
+        id="line-graph",
+        figure=fig
+    )
+]),
 
-fig = px.line(genre_combined, x='release_year')
-fig.show()
-# get the list of unique genres for the checkboxes
-
-#print(genres)
 # register the page in the app
 dash.register_page(__name__, path='/genre')
 
-# set initial value for load view of the graph
-initial_value = list(genres.unique())
-
-template = load_figure_template('cyborg')
-
-# define the layout
-layout = dbc.Container([
-    dbc.Row([
-        dbc.Col(html.H2("about-genre"))
-    ]),
-    dbc.Row([
-        dbc.Col([
-            dbc.Checklist(
-                id = 'genre-checklist',
-                options = [{'label': genre, 'value': genre} for genre in genres],
-                value = initial_value,
-                inline=True
-            )
-        ])
-    ]),
-    dbc.Row([
-        dbc.Col([
-            dcc.Graph(id='genre-graph', figure={})
-        ])
-    ])
-])
-
-
-# # define the callback to update the graph based on the selected genres
-# @app.callback(
-#     Output('genre-graph', 'figure'),
-#     [Input('genre-radio', 'value')],
-# )
-
-
-
-# def update_genre_graph(selected_genres):
-
-#     # if no genres, return empty figure
-#     if not selected_genres:
-#         return px.line(), {'display': 'none'}
-    
-#     filtered_df = df[df[['genre_1', 'genre_2', 'genre_3']].apply(lambda row: any(genre in selected_genres for genre in row),axis=1)]
-
-#     if filtered_df.empty:
-#         return px.line(), {'display': 'none'}
-    
-#     # plot the graph based on the filtered dataframe
-#     fig = px.line(filtered_df.groupby('release_year').size().reset_index(name='count'),
-#                  x='release_year', y='count', title='Genres Through the Years', template=template )
-#     return fig, {}

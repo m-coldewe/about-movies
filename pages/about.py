@@ -74,7 +74,7 @@ card4 = dbc.Card(
 layout = dbc.Container([
     dbc.Row([
         html.H2("Perfectionists-under-pressure (aka P-U-P):")
-    ], className="pb-4"),
+    ], className="pb-4 pt-4"),
     dbc.Row([
         dbc.Col([
             card1

@@ -25,6 +25,9 @@ layout = dbc.Container([
     ]),
     dbc.Row([
         dbc.Col([
+
+        ], width=3),
+        dbc.Col([
             dbc.Carousel(
     items=[
         {"key": "1", "src": "/assets/word_cloud.png", "img_style":{"max-height":"500px"}},
@@ -37,7 +40,10 @@ layout = dbc.Container([
     ride="carousel",
     className='pb-4'
 )
-        ], width=6)
+        ], width=6),
+        dbc.Col([
+
+        ], width=3)
     ])
 ])
 
