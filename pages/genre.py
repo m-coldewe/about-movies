@@ -10,7 +10,7 @@ import sqlite3
 app = dash.Dash(__name__)
 
 # connect to the SQLite database
-conn=sqlite3.connect(r"C:\Users\macol\OneDrive\Desktop\Classwork\about-movies\Resources\Blockbusters_2019_1977.db")
+conn=sqlite3.connect('Resources\Blockbusters_2019_1977.db')
 
 # read data for genre and year
 query = "SELECT release_year, genre_1, genre_2, genre_3, domestic_distributor FROM movie_data"
