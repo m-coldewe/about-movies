@@ -1,5 +1,5 @@
 import dash
-from dash import html, Dash, html, dcc
+from dash import html, Dash, html, Input, Output, State, callback
 import dash_bootstrap_components as dbc
 
 
@@ -71,6 +71,49 @@ card4 = dbc.Card(
     ],
 )
 
+disclaimer = "Puppy pictures taken from unsplash.com; the real names of the puppies are unknown. Credit for the photos is as follows:"
+disclaimer1 = "For 'Paolo', Photo by:" 
+dis_link1 = dbc.CardLink("Victor Grabarczyk", href="https://unsplash.com/@victor_vector?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash")
+disclaimer2 = "For 'Rush', Photo by:"
+dis_link2 = dbc.CardLink("charlesdeluvio", href="https://unsplash.com/@charlesdeluvio?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash")
+disclaimer3 = "For 'Lady', Photo by:" 
+dis_link3 = dbc.CardLink("Julio Bernal", href="https://unsplash.com/@jbernals?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash")
+
+collapse = dbc.Col(
+    [
+        dbc.Button(
+            "Disclaimer - Puppy Pics",
+            id="collapse-button",
+            className="mb-3",
+            color="secondary",
+            n_clicks=0,
+        ),
+        dbc.Collapse(
+            dbc.Card(dbc.CardBody([
+                html.P([
+                    disclaimer, html.Br(),
+                    html.P([disclaimer1, dis_link1]),
+                    html.P([disclaimer2, dis_link2]),
+                    html.P([disclaimer3, dis_link3])
+                ], className="card-text")
+            ])),
+            id="collapse",
+            is_open=False,
+        ),
+    ]
+)
+
+
+@callback(
+    Output("collapse", "is_open"),
+    [Input("collapse-button", "n_clicks")],
+    [State("collapse", "is_open")],
+)
+def toggle_collapse(n, is_open):
+    if n:
+        return not is_open
+    return is_open
+
 layout = dbc.Container([
     dbc.Row([
         html.H2("Perfectionists-under-pressure (aka P-U-P):")
@@ -86,6 +129,15 @@ layout = dbc.Container([
             card3
         ])
     ], className="pb-5"),
+    dbc.Row([
+        dbc.Col([
+
+        ]),
+        collapse,
+        dbc.Col([
+
+        ]),
+    ]),
     dbc.Row([
         html.H2("The dataset:")
     ]),
