@@ -31,7 +31,7 @@ layout = dbc.Container([
             dbc.Carousel(
     items=[
         {"key": "1", "src": "/assets/word_cloud.png", "img_style":{"max-height":"500px"}},
-        {"key": "2", "src": "/assets/test.png", "img_style":{"max-height":"500px"}},
+        {"key": "2", "src": "/assets/maxtrix_background.png", "img_style":{"max-height":"500px"}},
         {"key": "3", "src": "/assets/test.png", "img_style":{"max-height":"500px"}},
     ],
     controls=False,
@@ -45,12 +45,6 @@ layout = dbc.Container([
 
         ], width=3)
     ])
-])
-
-
-html.Div([
-    html.H1('about-movies'),
-    html.Img(src=dash.get_asset_url('test.png')),
 ])
 
 
