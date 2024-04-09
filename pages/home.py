@@ -31,12 +31,14 @@ layout = dbc.Container([
             dbc.Carousel(
     items=[
         {"key": "1", "src": "/assets/word_cloud.png", "img_style":{"max-height":"500px"}},
-        {"key": "2", "src": "/assets/maxtrix_background.png", "img_style":{"max-height":"500px"}},
-        {"key": "3", "src": "/assets/test.png", "img_style":{"max-height":"500px"}},
+        {"key": "2", "src": "/assets/fight_test.jpeg", "img_style":{"max-height":"500px"}},
+        {"key": "3", "src": "/assets/matrix3.jpg", "img_style":{"max-height":"500px"}},
+        {"key": "4", "src": "/assets/hogwarts.jpg", "img_style":{"max-height":"500px"}},
+        {"key": "5", "src": "/assets/scarface.jpg", "img_style":{"max-height":"500px"}},
     ],
     controls=False,
     indicators=False,
-    interval=3000,
+    interval=2500,
     ride="carousel",
     className='pb-4'
 )

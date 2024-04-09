@@ -12,7 +12,7 @@ nav = dbc.Nav(
     [
         dbc.NavItem(dbc.NavLink("Home", active="exact", href="/")),
         dbc.NavItem(dbc.NavLink("About", active="exact", href="/about")),
-        dbc.NavItem(dbc.NavLink("Dataset", active="exact", href="/table")),
+        dbc.NavItem(dbc.NavLink("Data", active="exact", href="/table")),
         dbc.NavItem(dbc.NavLink("Map", active="exact", href="/map")),
         dbc.NavItem(dbc.NavLink("Profit", active="exact", href="/profit")),
         dbc.NavItem(dbc.NavLink("Ratings", active=False, href="/ratings")),
