@@ -32,5 +32,7 @@ fig.update_traces(hovertemplate="<b>%{customdata[0]}</b><br><br>"
 dash.register_page(__name__)
 
 layout = html.Div([
+    html.H4("about-distributors"), html.Br(),
+    html.H3("Domestic Distributors by Profit", style={'color':'lightblue', 'textAlign':'center'}),
     dcc.Graph(id='Worldwide',figure=fig,style={'width': 1150, 'height': 600} )
 ])
