@@ -85,6 +85,6 @@ def calculate_profit_percentage(year):
     year_data['worldwide_profit_percentage'] = year_data['worldwide_profit'] / year_total_profit * 100
     return year_data
 
-# Initialize Dash App
+# Register Current Python Module As Page In The Dash Application
 dash.register_page(__name__, path='/films_years')
 
