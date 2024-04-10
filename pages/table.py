@@ -24,6 +24,8 @@ df.rename(columns={'film_title':'Movie Title','genre_1':'Genre 1',
 dash.register_page(__name__)
 
 layout = html.Div([
+    html.H4("about-data"),
+    html.H3("The Data, Unabridged", style={'textAlign':'center', 'color':'lightblue'}), html.Br(),
 dash_table.DataTable(
     data=df.to_dict('records'),
     columns=[{'id': c, 'name': c,} for c in df.columns],

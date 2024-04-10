@@ -37,10 +37,16 @@ movie_data = movie_data[['film_title',
                          'worldwide_profit',
                          'rank_year_ww_gross'
                          ]]
+year_budget_grouped_data = movie_data.groupby('release_year')['film_budget'].sum().reset_index()
+year_budget_grouped_data['film_budget'] /= 1e9
+year_budget_grouped_data['worldwide_profit'] = movie_data.groupby('release_year')['worldwide_profit'].sum().values
+year_budget_grouped_data['worldwide_profit'] /= 1e9
 
 
 # Define app layout
 layout = html.Div([
+    html.H4("about-distribution"), html.Br(),
+    html.H3("A Look at Profit Distribution by Year", style={'textAlign':'center', 'color':'lightblue'}), html.Br(),
     dcc.Dropdown(
         id='year-dropdown',
         options=[{'label': str(year), 'value': year} for year in year_budget_grouped_data['release_year']],
@@ -62,7 +68,7 @@ def update_pie_chart(selected_year):
     pie_year_profit = px.pie(year_data,
                              values='worldwide_profit_percentage',
                              names='film_title',
-                             title=f'Distribution of Profits Amongst Films from {selected_year}',
+                             title=f'Distribution from {selected_year}',
                              color_discrete_map=px.colors.sequential.Viridis,
                              hover_name='film_title',
                              hover_data=['domestic_distributor',
@@ -98,4 +104,4 @@ def calculate_profit_percentage(year):
     return year_data
 
 # Initialize Dash App
-dash.register_page(__name__, path='/film_length')
+dash.register_page(__name__, path='/films_years')

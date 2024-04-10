@@ -7,7 +7,7 @@ import sqlite3
 import pandas as pd
 
 # Connect To The SQLite Database
-conn=sqlite3.connect('../Resources/Blockbusters_2019_1977.db')
+conn=sqlite3.connect('Resources/Blockbusters_2019_1977.db')
 
 # SQL Query To Select All Data From movie_data Table
 query = "SELECT * FROM movie_data"
@@ -40,8 +40,10 @@ movie_data = movie_data[['film_title',
 
 # Define App Layout
 layout = html.Div([
+    html.H4("about-ratings"),html.Br(),
+    html.H3("The Relationship Between IMDb Rating and Profit(Worldwide)", style={'textAlign':'center', 'color':'lightblue'}), html.Br(),
     dcc.Dropdown(
-        id='dropdown-menu',
+        id='dropdown-menu2',
         options=[
             {'label': 'All Ratings', 'value': 'All'},
             {'label': 'Rated G', 'value':'G'},
@@ -53,13 +55,13 @@ layout = html.Div([
         clearable=False,  # Prevents User From Clearing The Dropdown
         style={'backgroundColor': 'white', 'color': 'black'},  # Sets The Style Of The Dropdown
     ),
-    dcc.Graph(id='plot')
+    dcc.Graph(id='plot2')
 ])
 
 # Define Callback To Update Plot Based On Selected Dropdown Option
 @callback(
-    Output('plot', 'figure'),
-    [Input('dropdown-menu', 'value')]
+    Output('plot2', 'figure'),
+    [Input('dropdown-menu2', 'value')]
 )
 
 # Creation Of Function To Update Scatter Plot Based On Selected Dropdown Option
@@ -140,4 +142,4 @@ def update_plot(selected_option):
     return profit_scatter
 
 # Initialize Dash App
-dash.register_page(__name__, path='/film_length')
+dash.register_page(__name__, path='/worldwide_profit')

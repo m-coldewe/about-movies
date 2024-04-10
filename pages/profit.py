@@ -1,15 +1,14 @@
 import dash
 from dash import html, dcc, callback
 from dash.dependencies import Input, Output
+import dash_bootstrap_components as dbc
 import plotly.express as px
 import pandas as pd
 import sqlite3
 
-# Initialize Dash app
-app = dash.Dash(__name__)
 
 # Connect To The SQLite Database
-conn=sqlite3.connect('../Resources/Blockbusters_2019_1977.db')
+conn=sqlite3.connect('Resources/Blockbusters_2019_1977.db')
 
 # SQL Query To Select All Data From movie_data Table
 query = "SELECT * FROM movie_data"
@@ -64,7 +63,7 @@ bar_year_budget.update_layout(height=900,
                               font=dict(color='white'),
                               title_x=0.5,
                               title_font_size=26)
-bar_year_budget.show()
+
 
 bar_year_profit = px.bar(year_budget_grouped_data,
                          x='release_year',
@@ -86,19 +85,43 @@ bar_year_profit.update_layout(height=900,
                               font=dict(color='white'),
                               title_x=0.5,
                               title_font_size=26)
-bar_year_profit.show()
+
 
 # Define App Layout
-app.layout = html.Div([
-    html.Div([
-        dcc.Graph(id='budget-plot', figure=bar_year_budget)
+layout = html.Div([
+    dbc.Row([
+        dbc.Col([
+            html.H4("about-profit", className='mb-4')
+        ], width=12)
     ]),
-    html.B(),
-    html.Div([
-        dcc.Graph(id='profit-plot', figure=bar_year_profit)
+    dbc.Row([
+        dbc.Col([
+            html.H3("A Look at Budget and Worldwide Profit from 1977 - 2019", className='mb-4', style={'color':'lightblue', 'textAlign':'center'})
+        ], width=12)
+    ]),
+    dbc.Row([
+        dbc.Col([
+            dcc.Graph(id='budget-plot', figure=bar_year_budget, className='mb-4')
+        ])
+    ]),
+    dbc.Row([
+        dbc.Col([
+            dcc.Graph(id='profit-plot', figure=bar_year_profit)
+        ])
     ])
 ])
 
-# Run the app
-if __name__ == '__main__':
-    app.run_server(debug=True)
+
+
+
+# html.Div([
+#     dbc.Row([
+#         dbc.Col([
+#         dcc.Graph(id='budget-plot', figure=bar_year_budget))],
+#     ]),
+#     html.Div([
+#         dcc.Graph(id='profit-plot', figure=bar_year_profit)
+#     ])
+# ])
+
+dash.register_page(__name__, path='/profit')

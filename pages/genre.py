@@ -39,7 +39,7 @@ fig = px.line(genre_per_year, x="release_year", y="count", color="genre", templa
 
 # # define layout
 layout = html.Div([
-    html.H4("about-genre"), html.Br(),
+    html.H4("about-genres"), html.Br(),
     html.H3("A Look at Genre from 1977 - 2019", style={'color': 'lightblue', 'textAlign':'center'}),
     dcc.Graph(
         id="line-graph",

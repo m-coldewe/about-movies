@@ -42,8 +42,10 @@ movie_data = movie_data[['film_title',
 
 # Define App Layout
 layout = html.Div([
+    html.H4("about-length"),html.Br(),
+    html.H3("The Relationship Between Film Length and MPAA Rating", style={'textAlign':'center', 'color':'lightblue'}), html.Br(),
     dcc.Dropdown(
-        id='dropdown-menu',
+        id='dropdown-menu1',
         options=[
             {'label': 'All Ratings', 'value': 'All'},
             {'label': 'Rated G', 'value':'G'},
@@ -55,13 +57,13 @@ layout = html.Div([
         clearable=False,  # Prevents User From Clearing The Dropdown
         style={'backgroundColor': 'white', 'color': 'black'},  # Sets The Style Of The Dropdown
     ),
-    dcc.Graph(id='plot')
+    dcc.Graph(id='plot1')
 ])
 
 # Define Callback To Update Plot Based On Selected Dropdown Option
 @callback(
-    Output('plot', 'figure'),
-    [Input('dropdown-menu', 'value')],
+    Output('plot1', 'figure'),
+    [Input('dropdown-menu1', 'value')],
 )
 
 # Creation Of Function To Update Scatter Plot Based On Selected Dropdown Option
@@ -137,7 +139,7 @@ def update_plot(selected_option):
         yaxis_title='IMDb Rating',
         coloraxis_colorbar_title='IMDb Rating',
         paper_bgcolor='black',
-        plot_bgcolor='lightgray',
+        plot_bgcolor='WhiteSmoke',
         font=dict(color='white')
 )
     return rating_scatter

@@ -5,7 +5,7 @@ import dash_bootstrap_components as dbc
 
 dash.register_page(__name__, path='/about')
 
-content_card_1 = "Paolo enjoys photography and following his person around. He's detail-oriented, and enjoys problem-solving."
+content_card_1 = "Maui enjoys photography and following his person around. He's detail-oriented, and enjoys problem-solving."
 content_card_2 = "Rush enjoys pursuing knowledge down rabbit holes and arguing with TAs. He's focused, and purses understanding whereever his inquiries take him."
 content_card_3 = "Lady enjoys long walks and good stories. She's persistent, and enjoys seeing her ideas bear fruit."
 
