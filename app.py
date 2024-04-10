@@ -1,13 +1,15 @@
+# Import Dependencies
 import dash
 from dash import Dash, html, dcc
 import dash_bootstrap_components as dbc
 from dash_bootstrap_templates import load_figure_template
 
 
+# Initialize Dash Application Instance
 app = dash.Dash(__name__, external_stylesheets=[dbc.themes.CYBORG], use_pages=True, suppress_callback_exceptions=True)
 
 
-
+# Define Navigation Bar Using Dash Bootstrap Components
 nav = dbc.Nav(
     [
         dbc.NavItem(dbc.NavLink("Home", active="exact", href="/")),
@@ -23,12 +25,16 @@ nav = dbc.Nav(
     pills=True,
 )
 
+
+# Define Layout Of Dash Application Using Dash Bootstrap Components
 app.layout = dbc.Container([
     nav,
     dash.page_container
     ])
 
 
-
+# Conditionally Execute Dash Application If This Script Is Run Directly
 if __name__ == '__main__':
     app.run_server(debug=True)
+
+    

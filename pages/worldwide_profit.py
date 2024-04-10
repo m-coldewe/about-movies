@@ -7,10 +7,10 @@ import sqlite3
 import pandas as pd
 
 # Connect To The SQLite Database
-conn=sqlite3.connect('Resources/Blockbusters_2019_1977.db')
+conn=sqlite3.connect('Resources/scatter_bar_pie.db')
 
 # SQL Query To Select All Data From movie_data Table
-query = "SELECT * FROM movie_data"
+query = "SELECT * FROM graph_movie_data"
 
 # Load movie_data Table Into Pandas DataFrame
 movie_data = pd.read_sql(query, conn)
@@ -18,30 +18,10 @@ movie_data = pd.read_sql(query, conn)
 # Close The Connection
 conn.close()
 
-movie_data['genres'] = movie_data[['genre_1', 'genre_2', 'genre_3']].apply(lambda x: ', '.join(x.dropna()), axis=1)
-
-movie_data = movie_data[['film_title',
-                         'genre_1',
-                         'genre_2',
-                         'genre_3',
-                         'genres',
-                         'release_year',
-                         'domestic_distributor',
-                         'mpaa_rating',
-                         'length_in_min',
-                         'imdb_rating',
-                         'film_budget',
-                         'domestic_gross',
-                         'domestic_profit',
-                         'worldwide_gross',
-                         'worldwide_profit',
-                         'rank_year_ww_gross'
-                         ]]
-
 # Define App Layout
 layout = html.Div([
     html.H4("about-ratings"),html.Br(),
-    html.H3("The Relationship Between IMDb Rating and Profit(Worldwide)", style={'textAlign':'center', 'color':'lightblue'}), html.Br(),
+    html.H3("The Relationship Between IMDb Rating and Worlwide Profit", style={'textAlign':'center', 'color':'lightblue'}), html.Br(),
     dcc.Dropdown(
         id='dropdown-menu2',
         options=[
@@ -51,9 +31,9 @@ layout = html.Div([
             {'label': 'Rated PG-13', 'value': 'PG-13'},
             {'label': 'Rated R', 'value': 'R'}
         ],
-        value='All',  # Default Value Displayed Prior To User Selection
-        clearable=False,  # Prevents User From Clearing The Dropdown
-        style={'backgroundColor': 'white', 'color': 'black'},  # Sets The Style Of The Dropdown
+        value='All',
+        clearable=False,
+        style={'backgroundColor': 'white', 'color': 'black'},
     ),
     dcc.Graph(id='plot2')
 ])
@@ -81,8 +61,8 @@ def update_plot(selected_option):
                                                 'release_year',
                                                 'domestic_distributor',
                                                 'genres'],
-                                    width=900,
-                                    height=650)
+                                    width=1300,
+                                    height=700)
         profit_scatter.update_traces(hovertemplate='<b>%{customdata[0]}</b><br>' +
                                                     'Release Year: %{customdata[1]}<br>' +
                                                     'Domestic Distributor: %{customdata[2]}<br>' +
@@ -104,14 +84,15 @@ def update_plot(selected_option):
                                                 'release_year',
                                                 'domestic_distributor',
                                                 'genres'],
-                                    width=900,
-                                    height=650,
+                                    width=1300,
+                                    height=700,
                                     trendline="ols")
         profit_scatter.data[0]['hovertemplate'] = '<b>%{customdata[0]}</b><br>'+\
             'Release Year: %{customdata[1]}<br>'+\
                 'Domestic Distributor: %{customdata[2]}<br>'+\
                 'Worldwide Profit: $%{y:,.0f}<br>'+\
                 'IMDb Rating: %{x}<br>'+'Genres: %{customdata[3]}'
+        
         # Retrieve Desired Data From The OLS Trendline Model
         line_stats = px.get_trendline_results(profit_scatter)
         line_stats = line_stats.iloc[0]['px_fit_results']
@@ -119,6 +100,7 @@ def update_plot(selected_option):
         slope = line_stats.params[1]
         p_value = line_stats.pvalues[1]
         r_squared = line_stats.rsquared
+
         # Input OLS Trendline Information As Hover Data
         regression_equation = f'y = {slope:.4f} * x + {y_intercept:.4f}'
         p_value_display = f'P-Value = {p_value:.5f}'
@@ -141,5 +123,6 @@ def update_plot(selected_option):
 )
     return profit_scatter
 
-# Initialize Dash App
+# Register Current Python Module As Page In The Dash Application
 dash.register_page(__name__, path='/worldwide_profit')
+

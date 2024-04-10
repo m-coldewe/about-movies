@@ -1,10 +1,9 @@
+# Import Dependencies
 import dash
 from dash import html, Dash, html, Input, Output, State, callback
 import dash_bootstrap_components as dbc
 
-
-dash.register_page(__name__, path='/about')
-
+# Assigning Descriptions For Each Team Member
 content_card_1 = "Maui enjoys photography and following his person around. He's detail-oriented, and enjoys problem-solving."
 content_card_2 = "Rush enjoys pursuing knowledge down rabbit holes and arguing with TAs. He's focused, and purses understanding whereever his inquiries take him."
 content_card_3 = "Lady enjoys long walks and good stories. She's persistent, and enjoys seeing her ideas bear fruit."
@@ -14,7 +13,7 @@ card1 = dbc.Card(
         dbc.CardImg(src="/assets/static/images/cesar_test.jpg", top=True, className="card-img-top"),
         dbc.CardBody(
             [
-                html.H4("Paolo"), html.H4("aka Cesar", className="card-title"),
+                html.H4("Maui"), html.H4("aka Cesar", className="card-title"),
                 html.P([content_card_1, html.Br(), html.Br(), html.P("Favorite movie: 'Back to the Future'")],
                     className="card-text",
                 ),
@@ -30,7 +29,7 @@ card2 = dbc.Card(
         dbc.CardBody(
             [
                 html.H4("Rush"), html.H4("aka Harsh", className="card-title"),
-                html.P([content_card_2, html.Br(), html.Br(), html.P("Favorite movie: 'Transformers: End of Days'")],
+                html.P([content_card_2, html.Br(), html.Br(), html.P("Favorite movie: 'Men in Black'")],
                     className="card-text",
                 ),
                 dbc.Button("Find Harsh on Github", color="secondary", href="https://github.com/10H-K"),
@@ -54,6 +53,7 @@ card3 = dbc.Card(
     ],
 )
 
+# Assigning Descriptions And Disclaimers For Dataset
 dataset_content = "Retrived from kaggle.com, the Worldwide Blockbuster 2019-1977 dataset provides information on the top ten highest grossing films worldwide between the years 2019 and 1977. Further information on the sources of information and exceptions can be found at the link provided below."
 dataset_content2 = "The dataset includes the following attributes: release_year, rank_in_year, imdb_rating, mpaa_rating, film_title, film_budget, lengh_in_min, domestic_distributor, worldwide_gross, domestic_gross, and up to three associated genres."
 
@@ -71,14 +71,16 @@ card4 = dbc.Card(
     ],
 )
 
+# Assigning Descriptions And Disclaimers For Team Member's Puppy Pictures
 disclaimer = "Puppy pictures taken from unsplash.com; the real names of the puppies are unknown. Credit for the photos is as follows:"
-disclaimer1 = "For 'Paolo', Photo by:" 
-dis_link1 = dbc.CardLink("Victor Grabarczyk", href="https://unsplash.com/@victor_vector?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash")
+disclaimer1 = "For 'Maui', Photo by:" 
+dis_link1 = dbc.CardLink("Cesar Rojas (@carojasp12)")
 disclaimer2 = "For 'Rush', Photo by:"
 dis_link2 = dbc.CardLink("charlesdeluvio", href="https://unsplash.com/@charlesdeluvio?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash")
 disclaimer3 = "For 'Lady', Photo by:" 
 dis_link3 = dbc.CardLink("Julio Bernal", href="https://unsplash.com/@jbernals?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash")
 
+# Define A Collapsible Component Using Dash Bootstrap Components (dbc)
 collapse = dbc.Col(
     [
         dbc.Button(
@@ -103,7 +105,7 @@ collapse = dbc.Col(
     ]
 )
 
-
+# Define Callback Function That Toggles Visibility Of The Collapse Element
 @callback(
     Output("collapse", "is_open"),
     [Input("collapse-button", "n_clicks")],
@@ -114,6 +116,7 @@ def toggle_collapse(n, is_open):
         return not is_open
     return is_open
 
+# Define Layout Of The Dash Application Using Dash Bootstrap Components (dbc)
 layout = dbc.Container([
     dbc.Row([
         html.H2("Perfectionists-under-pressure (aka P-U-P):")
@@ -147,3 +150,7 @@ layout = dbc.Container([
        ]) 
     ])
 ])
+
+# Register Current Python Module As Page In The Dash Application
+dash.register_page(__name__, path='/about')
+

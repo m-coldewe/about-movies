@@ -1,12 +1,10 @@
+# Import Dependencies
 import dash
 from dash import html, Dash, html, dcc
 import dash_bootstrap_components as dbc
 from dash_bootstrap_templates import load_figure_template
 
-
-dash.register_page(__name__, path='/')
-
-
+# Define Layout
 layout = dbc.Container([
     dbc.Row([
         dbc.Col(html.H2("Welcome to about-movies:",
@@ -49,7 +47,7 @@ layout = dbc.Container([
     ])
 ])
 
-
+# Define Carousel Component Using Dash Bootstrap Components
 carousel = dbc.Carousel(
     items=[
         {"key": "1", "src": "/static/images/slide1.svg"},
@@ -61,3 +59,7 @@ carousel = dbc.Carousel(
     interval=2000,
     ride="carousel",
 )
+
+# Register Current Python Module As Page In The Dash Application
+dash.register_page(__name__, path='/')
+
