@@ -38,6 +38,10 @@ movie_data = movie_data[['film_title',
                          'rank_year_ww_gross'
                          ]]
 
+year_budget_grouped_data = movie_data.groupby('release_year')['film_budget'].sum().reset_index()
+year_budget_grouped_data['film_budget'] /= 1e9
+year_budget_grouped_data['worldwide_profit'] = movie_data.groupby('release_year')['worldwide_profit'].sum().values
+year_budget_grouped_data['worldwide_profit'] /= 1e9
 
 # Define app layout
 layout = html.Div([
