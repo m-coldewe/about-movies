@@ -6,8 +6,8 @@ from dash_bootstrap_templates import load_figure_template
 import pandas as pd
 import sqlite3
 
-# get gitbash to recognize @app
-app = dash.Dash(__name__)
+# # get gitbash to recognize @app
+# app = dash.Dash(__name__)
 
 # connect to the SQLite database
 conn=sqlite3.connect('Resources\Blockbusters_2019_1977.db')

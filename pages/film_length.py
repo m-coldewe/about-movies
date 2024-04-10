@@ -6,8 +6,6 @@ import plotly.express as px
 import sqlite3
 import pandas as pd
 
-# Initialize Dash App
-app = dash.Dash(__name__)
 
 # Connect To The SQLite Database
 conn=sqlite3.connect('Resources/Blockbusters_2019_1977.db')
@@ -20,6 +18,27 @@ movie_data = pd.read_sql(query, conn)
 
 # Close The Connection
 conn.close()
+
+movie_data['genres'] = movie_data[['genre_1', 'genre_2', 'genre_3']].apply(lambda x: ', '.join(x.dropna()), axis=1)
+
+movie_data = movie_data[['film_title',
+                         'genre_1',
+                         'genre_2',
+                         'genre_3',
+                         'genres',
+                         'release_year',
+                         'domestic_distributor',
+                         'mpaa_rating',
+                         'length_in_min',
+                         'imdb_rating',
+                         'film_budget',
+                         'domestic_gross',
+                         'domestic_profit',
+                         'worldwide_gross',
+                         'worldwide_profit',
+                         'rank_year_ww_gross'
+                         ]]
+
 
 # Define App Layout
 layout = html.Div([
@@ -42,7 +61,7 @@ layout = html.Div([
 # Define Callback To Update Plot Based On Selected Dropdown Option
 @callback(
     Output('plot', 'figure'),
-    [Input('dropdown-menu', 'value')]
+    [Input('dropdown-menu', 'value')],
 )
 
 # Creation Of Function To Update Scatter Plot Based On Selected Dropdown Option
@@ -118,10 +137,10 @@ def update_plot(selected_option):
         yaxis_title='IMDb Rating',
         coloraxis_colorbar_title='IMDb Rating',
         paper_bgcolor='black',
+        plot_bgcolor='lightgray',
         font=dict(color='white')
 )
     return rating_scatter
 
-# Run The App
-if __name__ == '__main__':
-    app.run_server(debug=True)
+# Initialize Dash App
+dash.register_page(__name__, path='/film_length')
