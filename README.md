@@ -15,6 +15,7 @@ To run the Plotly Dash Application, please follow the Requirements.txt file to s
 ## Process
 
 #### Data Cleaning
+
 The dataset required minnimal cleaning. We removed extraneous commas, changed the budget and gross columns to appropriate numeric types, removed extra spaces, and renamed the Music and Romance columns. Then, because we wanted to look at the profit, both worldwide and domestic, we subtracted the respective film budgets from the gross, and ended by reorganizing the columns for better readability. 
 
 Finally, we created the database using sqlite3.
