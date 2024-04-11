@@ -6,7 +6,9 @@ Movies have the ability to bring people together from diverse cultures and backg
 
 ## Tools
 
-For our application, we use Plotly Dash in conjunction with Plotly Express, Dash Bootstrap Components, Dash Bootstrap Templates, Dash Leaflet, and Pandas to build out the graphs and interactive elements, and filter the data. 
+For our application, we use Plotly Dash in conjunction with Plotly Express, Dash Bootstrap Components, Dash Bootstrap Templates, Dash Leaflet, and Pandas to build out the graphs and interactive elements, and filter the data.
+
+Retrived from kaggle.com, the Worldwide Blockbuster 2019-1977 dataset provides information on the top ten highest grossing films worldwide between the years 2019 and 1977. https://www.kaggle.com/datasets/narmelan/top-ten-blockbusters-20191977
 
 ## Requirements
 
