@@ -35,7 +35,7 @@ Our About page also uses bootstrap components and the container system to create
 The Data page (table.py) pulls the dataset from the sqlite database to display the entire dataset used for this project in a searchable format so that anyone who wants to search the information contained within may. It uses the Dash DataTable with CSS styling to give it the black-red-and-white color scheme.
 
 #### Map
-The map page, which looks at the productions through the Studios that distributed them, shows the physical location of each stuido along with a selection of interesting information through a hover. It uses plotly express in conjunction with plotly graph objects, and displays neatly using Dash html and Dash Core Components. 
+The map page, which looks at the productions through the Studios that distributed them, shows the physical location of each stuido along with a selection of interesting information through a hover. It uses dash leaflet in conjunction with plotly graph objects, and displays neatly using Dash html and Dash Core Components. 
 
 #### Financials
 For Financials, we look at budget and profit in a pair of bar graphs that visualizes the movement of money for the years from 1977 to 2019. The graphs use plotly express with dash dependencies, and are organized within the page using dash bootstrap components.
