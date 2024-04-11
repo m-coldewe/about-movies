@@ -69,12 +69,12 @@ The Distribution page shows how each movie compared to the other top performing 
 
 #### Financials
 
-![image](https://github.com/m-coldewe/about-movies/assets/152930492/0810c65d-f1ec-417a-b3a4-74798f96e03e)
-![image](https://github.com/m-coldewe/about-movies/assets/152930492/d07dfa85-52be-436e-a784-811ef4bb6126)
+![image](https://github.com/m-coldewe/about-movies/assets/152930492/dadd22cd-0fba-481d-a3a0-a4e85d97b22a)
+![image](https://github.com/m-coldewe/about-movies/assets/152930492/d198dee1-3b00-49fa-bb8e-7f14be10a95f)
 
 #### Durations
 
-![image](https://github.com/m-coldewe/about-movies/assets/152930492/ed82564f-2412-4c4d-aac4-89aeeaafc7f4)
+![image](https://github.com/m-coldewe/about-movies/assets/152930492/ea07eed8-6a04-45d8-9e9c-8bb138c10eaa)
 
 #### Genres
 
@@ -82,7 +82,7 @@ The Distribution page shows how each movie compared to the other top performing 
 
 #### Ratings
 
-![image](https://github.com/m-coldewe/about-movies/assets/152930492/22eb9423-73f2-4a09-9f96-22310c30ea21)
+![image](https://github.com/m-coldewe/about-movies/assets/152930492/83342c3b-12ff-40ce-b889-81f444251883)
 
 #### Distribution
 
