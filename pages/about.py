@@ -74,7 +74,7 @@ card4 = dbc.Card(
 # Assigning Descriptions And Disclaimers For Team Member's Puppy Pictures
 disclaimer = "Puppy pictures taken from unsplash.com; the real names of the puppies are unknown. Credit for the photos is as follows:"
 disclaimer1 = "For 'Maui', Photo by:" 
-dis_link1 = dbc.CardLink("Cesar Rojas (@carojasp12)")
+dis_link1 = dbc.CardLink("Victor Grabarczyk", href="https://unsplash.com/@victor_vector?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash")
 disclaimer2 = "For 'Rush', Photo by:"
 dis_link2 = dbc.CardLink("charlesdeluvio", href="https://unsplash.com/@charlesdeluvio?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash")
 disclaimer3 = "For 'Lady', Photo by:" 
