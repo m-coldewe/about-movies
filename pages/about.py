@@ -1,6 +1,6 @@
 # Import Dependencies
 import dash
-from dash import html, Dash, html, Input, Output, State, callback
+from dash import html, html, Input, Output, State, callback
 import dash_bootstrap_components as dbc
 
 # Assigning Descriptions For Each Team Member

@@ -86,5 +86,5 @@ def calculate_profit_percentage(year):
     return year_data
 
 # Register Current Python Module As Page In The Dash Application
-dash.register_page(__name__, path='/films_years')
+dash.register_page(__name__, path='/distribution')
 

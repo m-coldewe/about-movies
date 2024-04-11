@@ -99,5 +99,5 @@ layout = html.Div([
 ])
 
 # Register Current Python Module As Page In The Dash Application
-dash.register_page(__name__, path='/profit')
+dash.register_page(__name__, path='/financials')
 

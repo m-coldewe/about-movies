@@ -1,8 +1,7 @@
 # Import Dependencies
 import dash
-from dash import html, dcc, Input, Output
+from dash import html, dcc
 import plotly.express as px
-import dash_bootstrap_components as dbc
 from dash_bootstrap_templates import load_figure_template
 import pandas as pd
 import sqlite3
@@ -52,5 +51,5 @@ layout = html.Div([
 ]),
 
 # Register Current Python Module As Page In The Dash Application
-dash.register_page(__name__, path='/genre')
+dash.register_page(__name__, path='/genres')
 

@@ -124,5 +124,5 @@ def update_plot(selected_option):
     return profit_scatter
 
 # Register Current Python Module As Page In The Dash Application
-dash.register_page(__name__, path='/worldwide_profit')
+dash.register_page(__name__, path='/ratings')
 

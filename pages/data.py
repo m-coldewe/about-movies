@@ -1,5 +1,5 @@
 import dash
-from dash import dash_table, dcc, html, Input, Output, callback
+from dash import dash_table, html
 import pandas as pd
 import sqlite3
 
