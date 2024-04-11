@@ -54,9 +54,15 @@ The Distribution page shows how each movie compared to the other top performing 
 
 ### Home
 
+![image](https://github.com/m-coldewe/about-movies/assets/152930492/7ac19f78-1a48-41bd-b21d-5e4694df0a58)
+
 ### About
 
+
+
 ### Data
+
+
 
 ### Genres
 
