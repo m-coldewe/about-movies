@@ -79,7 +79,7 @@ The Distribution page shows how each movie compared to the other top performing 
 
 #### Genres
 
-![image](https://github.com/m-coldewe/about-movies/assets/152930492/3a628ae5-1d2f-438e-9c70-e87f6aa09f2a)
+![image](https://github.com/m-coldewe/about-movies/assets/152930492/8d744153-1611-4eae-9bf3-cf5de224be83)
 
 #### Ratings
 
