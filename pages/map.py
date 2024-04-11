@@ -14,25 +14,44 @@ df = pd.read_sql(query, conn)
 
 # Close the database connection
 conn.close()
-fig = px.scatter_mapbox(df,hover_name='Producer', hover_data={'Producer': True,'Worldwide Profit HN': True,'Total Movies': True
-                                                              ,'Film Title': True,'Movie Profit': True,'Release Year': True},
-                    color_discrete_sequence=["red"],color_continuous_scale='Viridis',                                          
-                    color='Worldwide Profit',size='Worldwide Profit',zoom=10.5,
-                    center={'lat': 34.07623971367669, 'lon': -118.35312266347428}
-                    ,lat="Latitude", lon="Longitude")
-fig.update_layout(
-    mapbox_style="open-street-map")
-fig.update_traces(hovertemplate="<b>%{customdata[0]}</b><br><br>"
-                    'Worldwide Profit: %{customdata[1]}<br>'
-                    'Total Movies: %{customdata[2]}<br>'
-                    'Most Profitable Movie: %{customdata[3]}<br>'
-                	'Movie Profit: %{customdata[4]}<br>'
-                	'Release Year: %{customdata[5]}<br>')
 
-dash.register_page(__name__)
+def create_marker(studio):
+    # Calculate marker size based on profit
+    size_factor = studio['Worldwide Profit'] / df['Worldwide Profit'].max()  # Adjust for relative sizes
+    icon_size = [300* size_factor, 150 * size_factor]
+
+    icon = {
+        "iconUrl": studio['url_image'],
+        "iconSize":   icon_size,
+        "iconAnchor": [22, 94],
+        "popupAnchor": [-3, -76],
+        "className": "icon"
+    }
+    tooltip_content = ([html.P(f"Worldwide Profit: {studio['Worldwide Profit']}"),
+                       html.P(f"Total Movies: {studio['Total Movies']}"),
+                       html.P(f"Most Profitable Movie: {studio['Film Title']}"),
+                       html.P(f"Movie Profit: {studio['Movie Profit']} "),
+                       html.P(f"Release Year: {studio['Release Year']} ")])
+    
+                      
+    return dl.Marker(
+        position=[studio['Latitude'], studio['Longitude']],
+        icon=icon,
+        children=[
+            dl.Tooltip(tooltip_content, direction='top')
+                    
+        ]
+    )
+markers = [create_marker(row) for index, row in df.iterrows()]
 
 layout = html.Div([
-    html.H4("about-distributors"), html.Br(),
-    html.H3("Domestic Distributors by Profit", style={'color':'lightblue', 'textAlign':'center'}),
-    dcc.Graph(id='Worldwide',figure=fig,style={'width': 1150, 'height': 600} )
+    dl.Map(center=[34.07623971367669, -118.35312266347428], zoom=11, children=[
+        dl.TileLayer(),
+        *markers
+    ], style={'width': '100%', 'height': '500px'}
+    )
 ])
+
+
+
+dash.register_page(__name__)
