@@ -90,4 +90,6 @@ The Distribution page shows how each movie compared to the other top performing 
 ![image](https://github.com/m-coldewe/about-movies/assets/152930492/f675ef3f-18ec-4491-827d-61b88fdda848)
 
 ## Summary
-Using Plotly Dash, we created
+Using Plotly Dash, we created an easy-to-use interface for exploring the movies database that allows the creation of dynamic visualizations. As a team, we learned how Plotly Dash can prioritize the user experience, both through the multiple graphing extensions, and through the multiple style options, as well as the the interactive nature of the visualizations. Compared to the other options, it has more flexibility and customization; it integrates seamslessly with python, and it's scalable. Provided more time, we could have built out more user interactions to epxlore the full breadth of the database. 
+
+Overall, this project allowed us to explore a shared passion, and explore a completely new library to help us bring our interests to more people. See you at the movies!
