@@ -70,6 +70,8 @@ The Distribution page shows how each movie compared to the other top performing 
 
 #### Map
 
+![image](https://github.com/m-coldewe/about-movies/assets/152930492/da81e5d9-65d1-4f9f-b70b-9cf251fc327d)
+
 #### Financials
 
 ![image](https://github.com/m-coldewe/about-movies/assets/152930492/dadd22cd-0fba-481d-a3a0-a4e85d97b22a)
