@@ -1,9 +1,7 @@
 import dash
 import dash_leaflet as dl
 import pandas as pd
-from dash import Dash, dcc, html
-import plotly.graph_objects as go 
-import plotly.express as px
+from dash import html
 import sqlite3
 
 conn = sqlite3.connect('Resources/map.db')
@@ -14,6 +12,7 @@ df = pd.read_sql(query, conn)
 
 # Close the database connection
 conn.close()
+
 
 def create_marker(studio):
     # Calculate marker size based on profit
@@ -27,7 +26,8 @@ def create_marker(studio):
         "popupAnchor": [-3, -76],
         "className": "icon"
     }
-    tooltip_content = ([html.P(f"Worldwide Profit: {studio['Worldwide Profit']}"),
+    tooltip_content = ([html.P(f"Producer: {studio['Producer']}"),
+                        html.P(f"Worldwide Profit: {studio['Worldwide Profit']}"),
                        html.P(f"Total Movies: {studio['Total Movies']}"),
                        html.P(f"Most Profitable Movie: {studio['Film Title']}"),
                        html.P(f"Movie Profit: {studio['Movie Profit']} "),
@@ -38,20 +38,22 @@ def create_marker(studio):
         position=[studio['Latitude'], studio['Longitude']],
         icon=icon,
         children=[
-            dl.Tooltip(tooltip_content, direction='top')
+            dl.Tooltip(tooltip_content, direction='top',)
                     
         ]
     )
 markers = [create_marker(row) for index, row in df.iterrows()]
 
+
+
 layout = html.Div([
+    html.H4("about-distributors"),
+    html.H3("Domestic Distributors by Worldwide Profit", style={'textAlign':'center', 'color':'lightblue'}), html.Br(),
     dl.Map(center=[34.07623971367669, -118.35312266347428], zoom=11, children=[
         dl.TileLayer(),
         *markers
-    ], style={'width': '100%', 'height': '500px'}
+    ], style={'width': '100%', 'height': '650px'}
     )
 ])
-
-
 
 dash.register_page(__name__)
