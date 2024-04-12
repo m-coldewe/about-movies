@@ -1,24 +1,25 @@
+# Import Dependencies
 import dash
 import dash_leaflet as dl
 import pandas as pd
 from dash import html
 import sqlite3
 
+# Connect To The SQLite Database
 conn = sqlite3.connect('Resources/map.db')
 
-# Read data from the database into a DataFrame
+# Read Data From The Database Into A DataFrame
 query = 'SELECT * FROM map_data'
 df = pd.read_sql(query, conn)
 
-# Close the database connection
+# Close The Database Connection
 conn.close()
 
-
+# Define Function To Create Markers
 def create_marker(studio):
-    # Calculate marker size based on profit
+    
     size_factor = studio['Worldwide Profit'] / df['Worldwide Profit'].max()  # Adjust for relative sizes
     icon_size = [300* size_factor, 150 * size_factor]
-
     icon = {
         "iconUrl": studio['url_image'],
         "iconSize":   icon_size,
@@ -31,21 +32,18 @@ def create_marker(studio):
                        html.P(f"Total Movies: {studio['Total Movies']}"),
                        html.P(f"Most Profitable Movie: {studio['Film Title']}"),
                        html.P(f"Movie Profit: {studio['Movie Profit']} "),
-                       html.P(f"Release Year: {studio['Release Year']} ")])
-    
-                      
+                       html.P(f"Release Year: {studio['Release Year']} ")])       
     return dl.Marker(
         position=[studio['Latitude'], studio['Longitude']],
         icon=icon,
         children=[
-            dl.Tooltip(tooltip_content, direction='top',)
-                    
+            dl.Tooltip(tooltip_content, direction='top',)                    
         ]
     )
+
 markers = [create_marker(row) for index, row in df.iterrows()]
 
-
-
+# Define Layout
 layout = html.Div([
     html.H4("about-distributors"),
     html.H3("Domestic Distributors by Worldwide Profit", style={'textAlign':'center', 'color':'lightblue'}), html.Br(),
@@ -56,4 +54,6 @@ layout = html.Div([
     )
 ])
 
+# Register Current Python Module As Page In The Dash Application
 dash.register_page(__name__)
+

@@ -1,18 +1,20 @@
+# Import Dependencies
 import dash
 from dash import dash_table, html
 import pandas as pd
 import sqlite3
 
-# Connect to the SQLite database
+# Connect To The SQLite Database
 conn = sqlite3.connect('Resources/Blockbusters_2019_1977.db')
 
-# Read data from the database into a DataFrame
+# Read Data From The Database Into A DataFrame
 query = "SELECT * FROM movie_data"
 df = pd.read_sql(query, conn)
 
-# Close the database connection
+# Close The Database Connection
 conn.close()
 
+# Rename DataFrame Columns
 df.rename(columns={'film_title':'Movie Title','genre_1':'Genre 1',
                    'genre_2':'Genre 2','genre_3':'Genre 3','release_year':'Release Year','domestic_distributor':'Movie Studio',
                    'mpaa_rating':'MPAA Rating','length_in_min':'Length in Minutes','imdb_rating':'IMDB Rating',
@@ -21,8 +23,7 @@ df.rename(columns={'film_title':'Movie Title','genre_1':'Genre 1',
                    'rank_year_ww_gross':'Rank Year Worldwide Gross'
                     }, inplace=True)
 
-dash.register_page(__name__)
-
+# Define Layout
 layout = html.Div([
     html.H4("about-data"),
     html.H3("The Data, Unabridged", style={'textAlign':'center', 'color':'lightblue'}), html.Br(),
@@ -57,3 +58,7 @@ dash_table.DataTable(
 
 html.Div(id='datatable-interactivity-container')
 ])
+
+# Register Current Python Module As Page In The Dash Application
+dash.register_page(__name__)
+
